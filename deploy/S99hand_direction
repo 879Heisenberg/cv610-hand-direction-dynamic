@@ -1,0 +1,84 @@
+#!/bin/sh
+#
+# Boot the CV610 hand detector after the MPP and JD9853 display stack.
+# This script replaces the GUI sample's S99video_ui entry.
+
+APP_DIR=/root/hand_direction
+APP="$APP_DIR/bin/cv610_live_hand"
+MODEL="$APP_DIR/model/hand_detect_static.om"
+LOG_DIR=/tmp
+RUN_DIR=/var/run
+KO_DIR=/drv
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+export PATH
+
+ifconfig lo 127.0.0.1 netmask 255.0.0.0
+ifconfig lo up
+ifconfig eth0 up
+
+mkdir -p /etc/dropbear "$RUN_DIR"
+if ! pidof dropbear >/dev/null 2>&1; then
+    dropbear -R
+fi
+
+# The MPP loader also configures SPI/I2C/PWM pin multiplexing. It must run
+# before sdk_server and jd9853.ko.
+LOADER_DIR=""
+if [ -x "$KO_DIR/ko/load_ko/load3516cv610_20s_debug" ]; then
+    LOADER_DIR="$KO_DIR/ko/load_ko"
+elif [ -x "$KO_DIR/ko/load3516cv610/load3516cv610_20s_debug" ]; then
+    LOADER_DIR="$KO_DIR/ko/load3516cv610"
+fi
+if [ -n "$LOADER_DIR" ] && ! lsmod 2>/dev/null | grep -q '^sys_config '; then
+    (
+        cd "$LOADER_DIR" || exit 1
+        ./load3516cv610_20s_debug -i
+    ) >"$LOG_DIR/hand_direction_mpp_load.log" 2>&1 || \
+        echo "[hand_direction] MPP load failed; see $LOG_DIR/hand_direction_mpp_load.log" > /dev/kmsg
+fi
+
+if [ -x /root/sdk_server ] && ! pidof sdk_server >/dev/null 2>&1; then
+    /root/sdk_server >"$LOG_DIR/hand_direction_sdk_server.log" 2>&1 &
+    count=0
+    while [ "$count" -lt 5 ]; do
+        [ -S /run/sdk_server/osal_uds_server.sock ] && break
+        count=$((count + 1))
+        sleep 1
+    done
+fi
+
+if [ -f "$KO_DIR/jd9853.ko" ] && ! lsmod 2>/dev/null | grep -q '^jd9853 '; then
+    insmod "$KO_DIR/jd9853.ko" > /dev/kmsg 2>&1
+fi
+
+# Touch is optional for the detector, but preserve it for diagnostics/UI work.
+if [ -f "$KO_DIR/hynitron_touch.ko" ] && ! lsmod 2>/dev/null | grep -q '^hynitron_touch '; then
+    insmod "$KO_DIR/hynitron_touch.ko" > /dev/kmsg 2>&1
+fi
+
+if [ ! -x "$APP" ] || [ ! -f "$MODEL" ]; then
+    echo "[hand_direction] missing $APP or $MODEL" > /dev/kmsg
+    exit 1
+fi
+
+if pidof cv610_live_hand >/dev/null 2>&1; then
+    exit 0
+fi
+
+cd "$APP_DIR" || exit 1
+export LD_LIBRARY_PATH=/lib:/usr/lib
+export HAND_DRM_DEVICE=/dev/dri/card0
+export HAND_GESTURE_SOUND="$APP_DIR/audio/gesture_effect.wav"
+export HAND_GESTURE_SOUND_PLAYER="$APP_DIR/bin/cv610_gesture_sound"
+
+"$APP" "$MODEL" >"$LOG_DIR/hand_direction.log" 2>&1 &
+app_pid=$!
+echo "$app_pid" >"$RUN_DIR/hand_direction.pid"
+
+sleep 1
+if kill -0 "$app_pid" 2>/dev/null; then
+    echo "[hand_direction] started (PID $app_pid), log=$LOG_DIR/hand_direction.log"
+else
+    echo "[hand_direction] application exited; see $LOG_DIR/hand_direction.log" > /dev/kmsg
+fi

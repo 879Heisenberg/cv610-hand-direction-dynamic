@@ -1,0 +1,55 @@
+{
+  "input": {
+    "name": "images",
+    "shape": [
+      1,
+      3,
+      416,
+      416
+    ],
+    "elem_type": 1
+  },
+  "output": {
+    "name": "output0",
+    "shape": [
+      1,
+      5,
+      3549
+    ],
+    "elem_type": 1
+  },
+  "operators": [
+    "Add",
+    "Concat",
+    "Conv",
+    "Div",
+    "MatMul",
+    "MaxPool",
+    "Mul",
+    "Reshape",
+    "Resize",
+    "Sigmoid",
+    "Slice",
+    "Softmax",
+    "Split",
+    "Sub",
+    "Transpose"
+  ],
+  "forbidden_operators_found": [],
+  "source_weights": "C:\\Users\\32774\\Documents\\Codex\\2026-11-19\\new-chat\\outputs\\hand_yolo26n.pt",
+  "source_weights_sha256": "947BDE69BB091DC129DD68DEFBC50C099BCC4B8E0A448971FA876004589F1D3C",
+  "artifact": "C:\\Users\\32774\\Documents\\Codex\\2026-11-13\\https-docs-hisilicon-com-projects-hi\\work\\hand_direction\\model\\hand_yolo26n_416_static.onnx",
+  "artifact_sha256": "AA033EE6734E7445AD4270C3C67D7C2F8C5F335140F603667FE8C4E57E08A050",
+  "artifact_size_bytes": 9696350,
+  "deployment_size": [
+    416,
+    416
+  ],
+  "export": {
+    "opset": 19,
+    "dynamic": false,
+    "batch": 1,
+    "nms": false,
+    "end2end": false
+  }
+}

@@ -1,0 +1,31 @@
+# Build outputs and caches
+/build/
+/build-*/
+/out/
+/outputs/
+/deliverables/
+/CMakeFiles/
+/Testing/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+*.a
+*.o
+*.so
+
+# Model artifacts: ignore intermediate ONNX/calibration binaries and legacy model,
+# while keeping the active CV610 NPU runtime model tracked for reproducibility.
+/model/*.om
+/model/*.onnx
+/model/*.bin
+!/model/hand_detect_static.om
+
+# Temporary captures, logs, and packages
+*.nv21
+*.csv
+*.log
+*.zip
+*.tar
+*.bak*
+*.orig

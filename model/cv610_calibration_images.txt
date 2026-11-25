@@ -1,0 +1,12 @@
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/01_Natural_scene_000000252894.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/02_Natural_scene_000000515275.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/03_Natural_scene_000000320957.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/04_Fist_0dba24a3-e851-48d3-9335-a860.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/05_Fist_10879c9b-52c9-4bfa-b8b5-b38b.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/06_Fist_15bb3d83-aab1-4e14-b4b1-b162.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/07_Palm_081d779d-6ee0-42ee-a4a9-6c5e.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/08_Palm_8df55698-7754-4833-86fe-979e.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/09_Palm_51e282e5-77fb-4432-a0f3-8496.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/10_Stop_gesture_30e6fb5f-8ae1-4b10-8caa-080b.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/11_Stop_gesture_9eda9323-77d4-414a-9820-df6c.jpg
+/mnt/c/Users/32774/Documents/Codex/2026-11-19/new-chat/outputs/samples/12_Stop_gesture_19dfb578-2db5-4015-a538-c089.jpg
