@@ -1,7 +1,7 @@
 # 【CV610 开源实战】在 Hi3516CV610 上实现 27 Hz 实时动态四方向手势识别：自训练 YOLO26n、NEON 加速、防回中状态机与实机消融闭环
 
-- **开源仓库**：https://github.com/879Heisenberg/cv610-hand-direction
-- **预编译交付件（Release v1.0.0）**：https://github.com/879Heisenberg/cv610-hand-direction/releases/tag/v1.0.0
+- **开源仓库**：https://github.com/879Heisenberg/cv610-hand-direction-dynamic
+- **预编译交付件（Release v1.0.0）**：https://github.com/879Heisenberg/cv610-hand-direction-dynamic/releases/tag/v1.0.0
 - **硬件平台**：Hi3516CV610（ARM Cortex-A7，musl Linux，`hi_aiot_solution`）、板载 OS04D10 4M@30fps MIPI 摄像头、JD9853 240×320 SPI LCD、板载音频输出
 - **项目目标**：不依赖重型 21 点关键点或时序神经网络（LSTM / 3D-CNN），在极度轻量化的 CV610 上仅通过**自训练单类静态手掌检测 `.om` + 纯 C11 物理几何轨迹状态机**，实现低延迟、高鲁棒性的端侧实时四方向（`UP / DOWN / LEFT / RIGHT`）动态手势交互与声画反馈
 
