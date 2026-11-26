@@ -8,3 +8,4 @@ deploy/S99hand_direction text eol=lf
 *.om binary
 *.wav binary
 *.png binary
+*.gif binary

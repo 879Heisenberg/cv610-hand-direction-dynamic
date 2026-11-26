@@ -1,6 +1,8 @@
 # CV610 端侧四方向手势识别系统 (`hand_direction`)
 
-基于海思 **Hi3516CV610** 平台的实时四方向（`UP` / `DOWN` / `LEFT` / `RIGHT`）手势识别与交互系统，覆盖 **端侧视觉采集 -> ARMv7 NEON 预处理 -> SVP_NNN NPU 推理 -> 目标跟踪与几何方向状态机 -> JD9853 LCD HUD 可视化 + PWM 方向音效 + 离线连续流消融基准** 的完整闭环。
+基于海思 **Hi3516CV610** 平台的实时四方向（`UP` / `DOWN` / `LEFT` / `RIGHT`）手势识别与交互系统，覆盖 **自训练单类手部模型 -> 端侧视觉采集 -> ARMv7 NEON 预处理 -> SVP_NNN NPU 推理 -> 目标跟踪与几何方向状态机 -> JD9853 LCD HUD 可视化 + PWM 方向音效 + 离线连续流消融基准** 的完整闭环。
+
+![CV610 JD9853 3:4 实时动态手势 HUD 演示](docs/assets/demo_jd9853_hud.gif)
 
 ---
 
@@ -156,6 +158,7 @@ ctest --test-dir build-host --output-on-failure -V
 | `HAND_GESTURE_SOUND_PLAYER` | 音频播报辅助进程路径（默认 `/root/hand_direction/bin/cv610_gesture_sound`） |
 
 更多细节请查阅：
+* 完整开源实战案例长文（含自训练 YOLO26n 与踩坑总结）：[docs/case-study.md](docs/case-study.md)
 * 模型与前后处理接入：[docs/model-integration.md](docs/model-integration.md)
 * 实机评测、录制与长稳监控：[docs/benchmark-and-deployment.md](docs/benchmark-and-deployment.md)
 * 镜像打包与开机自启：[deploy/README.md](deploy/README.md)
